@@ -1,5 +1,3 @@
 # CIS520ACK
 
-Master Branch
-This'll be the branch we use to put the final product(s) in.
-
+There are no branches because we are men and men don't use branches.
