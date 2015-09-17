@@ -192,7 +192,7 @@ timer_interrupt (struct intr_frame *args UNUSED)
 }
 
 static void 
-wake_threads(struct *thread t, void *aux)
+wake_threads(struct thread *t, void *aux)
 {
    if(t->status == THREAD_BLOCKED)
    {
