@@ -23,4 +23,7 @@ https://w3.cs.jmu.edu/kirkpams/450-f14/projects/scheduling_project.shtml#SEC26
 //more general information about threads/methods in the threads folder of pintos
 https://w3.cs.jmu.edu/kirkpams/450-f14/projects/reference.shtml 
 
+//using test cases
+https://pintosiiith.wordpress.com/2012/10/01/running-test-cases-for-pintos-assignment/
+
 
