@@ -103,7 +103,7 @@ timer_sleep (int64_t ticks)
     thread_block();
     
     //sets interrupt level back to previous to ensure no logic crashes
-    int_set_level(previous_level);
+    intr_set_level(previous_level);
     
     
     
