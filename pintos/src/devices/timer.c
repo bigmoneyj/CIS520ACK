@@ -191,7 +191,7 @@ timer_interrupt (struct intr_frame *args UNUSED)
   thread_foreach(wake_threads(), 0);
 }
 
-static void 
+void 
 wake_threads(struct thread *t, void *aux)
 {
    if(t->status == THREAD_BLOCKED)
