@@ -76,18 +76,31 @@ Chris Donnelly <cjdonnel@ksu.edu>
 >> B1: Copy here the declaration of each new or changed `struct' or
 >> `struct' member, global or static variable, `typedef', or
 >> enumeration.  Identify the purpose of each in 25 words or less.
-
+    
+    struct semaphore sema_sleep;
+        This is a semaphore for the sleeping thread
+    struct list_elem donation_elem;
+        This is a list of the donation elements
+    struct list donor_list; 
+        This is a list of the donors
+    struct lock *blocker;
+        This is a lock of the blocker
+        
 >> B2: Explain the data structure used to track priority donation.
-
+    The data structure used to track priority donation is the list of donors.
 
 ---- ALGORITHMS ----
 
 >> B3: How do you ensure that the highest priority thread waiting for
 >> a lock, semaphore, or condition variable wakes up first?
+    By placing the sleeping threads in a list ordered by priority. If the current thread has the lock, and has a priority
+    which is lower than the thread waiting for the lock, then we need to do priority donation. We essentially swap the priorities
+    of the current locked thread with the waiting thread, that way when the lock is released, the thread that was waiting will
+    get it next.
 
 >> B4: Describe the sequence of events when a call to lock_acquire()
 >> causes a priority donation.  How is nested donation handled?
-
+    
 >> B5: Describe the sequence of events when lock_release() is called
 >> on a lock that a higher-priority thread is waiting for.
 
