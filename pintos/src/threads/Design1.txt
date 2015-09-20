@@ -18,6 +18,7 @@ Chris Donnelly <cjdonnel@ksu.edu>
 >> Online sources that we consulted to help learn about the project
     http://achurch.org/services/docs-5.1.24/tech/2.html
     http://knowledgejunk.net/2011/05/06/avoiding-busy-wait-in-timer_sleep-on-pintos/
+    Project1SessionA.PDF On K-State Online
 
 
                  ALARM CLOCK
