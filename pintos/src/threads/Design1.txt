@@ -16,8 +16,8 @@ Chris Donnelly <cjdonnel@ksu.edu>
 >> the TA, or extra credit, please give them here.
 
 >> Online sources that we consulted to help learn about the project
-http://achurch.org/services/docs-5.1.24/tech/2.html
-http://knowledgejunk.net/2011/05/06/avoiding-busy-wait-in-timer_sleep-on-pintos/
+    http://achurch.org/services/docs-5.1.24/tech/2.html
+    http://knowledgejunk.net/2011/05/06/avoiding-busy-wait-in-timer_sleep-on-pintos/
 
 
                  ALARM CLOCK
@@ -29,31 +29,42 @@ http://knowledgejunk.net/2011/05/06/avoiding-busy-wait-in-timer_sleep-on-pintos/
 >> `struct' member, global or static variable, `typedef', or
 >> enumeration.  Identify the purpose of each in 25 words or less.
 
+    struct semaphore sema_sleep;  /* Semaphore used to implement alarm_clock */
+        This helped us lock out the critical section to put a thread to sleep
+    
+    struct list_elem sleepelem;
+        This helped us keep track of the sleeping thread elements
 
 ---- ALGORITHMS ----
 
 >> A2: Briefly describe what happens in a call to your timer_sleep(),
 >> including the effects of the timer interrupt handler.
+    If the number of ticks is less than or eqal to 0, then we don't want to be sleeping anymore, so we return.
+    Otherwise, we want to put the thread to sleep for however many ticks specified.
 
 >> A3: What steps are taken to minimize the amount of time spent in
 >> the timer interrupt handler?
-
+    We created a sleep list, that way when we want to see if it is possible to wake a thread, we only check
+    those that are sleeping and not the ones that are waiting or currently running.
 
 ---- SYNCHRONIZATION ----
 
 >> A4: How are race conditions avoided when multiple threads call
 >> timer_sleep() simultaneously?
-
+    We use locks to avoid the race conditions when multiple threads call timer_sleep() simultaneously.
+    By putting locks around the critical section, we can only have one thread working at a time, and then we can 
+    release the lock, allowing the other threads who are waiting to access the critical section next.
 
 >> A5: How are race conditions avoided when a timer interrupt occurs
 >> during a call to timer_sleep()?
-
+    To avoid race conditions when a timer interrupt occurs during a call to timer_sleep(), we briefly disable interrupts
+    before adding the thread to the waiting list, and then re-enable the interrupts after it has been added to the list.
 
 ---- RATIONALE ----
 
 >> A6: Why did you choose this design?  In what ways is it superior to
 >> other designs that you considered?
-
+    Originally we had a design where we were checking every thread to see if it was able to be woken back up. This design was not     good because in reality, we don't want to check the threads that are currently waiting, or running. So we re-implemented it      to check only those that are currently in a sleeping state. 
 
 
              PRIORITY SCHEDULING
