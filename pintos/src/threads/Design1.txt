@@ -1,5 +1,6 @@
 
 CIS 520 - Programming Project #1
+Dr. Andresen
 
                    
 ---- GROUP ----
@@ -12,8 +13,7 @@ Chris Donnelly <cjdonnel@ksu.edu>
 
 ---- PRELIMINARIES ----
 
->> If you have any preliminary comments on your submission, notes for
->> the TA, or extra credit, please give them here.
+>> Comments: Kadin Zimmerman, Chris Donnelly, Alex Johnson
 
 >> Online sources that we consulted to help learn about the project
     http://achurch.org/services/docs-5.1.24/tech/2.html
@@ -30,10 +30,10 @@ Chris Donnelly <cjdonnel@ksu.edu>
 >> enumeration.  Identify the purpose of each in 25 words or less.
 
     struct semaphore sema_sleep;  /* Semaphore used to implement alarm_clock */
-        This helped us lock out the critical section to put a thread to sleep
+        This helped us put the threads to sleep and wake them up.
     
     struct list_elem sleepelem;
-        This helped us keep track of the sleeping thread elements
+        This helped us keep track of the sleeping threads
 
 ---- ALGORITHMS ----
 
