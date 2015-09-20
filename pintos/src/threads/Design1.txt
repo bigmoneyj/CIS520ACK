@@ -13,11 +13,14 @@ Chris Donnelly <cjdonnel@ksu.edu>
 
 ---- PRELIMINARIES ----
 
->> Comments: Kadin Zimmerman, Chris Donnelly, Alex Johnson
+>> Comments: Kadin Zimmerman, Chris Donnelly, Alex Johnson CIS520 project 1 submission.
+             We did not try to do all of the MLFQS extra credit because this project was extremely hard, and 
+             we didn't have time. 2 of the test cases are working though (mlfqs-fair-2 and mlfqs-fair-20)
 
 >> Online sources that we consulted to help learn about the project
     http://achurch.org/services/docs-5.1.24/tech/2.html
     http://knowledgejunk.net/2011/05/06/avoiding-busy-wait-in-timer_sleep-on-pintos/
+    http://web.stanford.edu/class/cs140/projects/pintos/pintos_2.html#SEC30
     Project1SessionA.PDF On K-State Online
 
 
@@ -32,27 +35,29 @@ Chris Donnelly <cjdonnel@ksu.edu>
 
     struct semaphore sema_sleep;  /* Semaphore used to implement alarm_clock */
         This helped us put the threads to sleep and wake them up.
-    
     struct list_elem sleepelem;
         This helped us keep track of the sleeping threads
+    struct list sleep_list;
+        This is a list of the threads that are asleep.
 
 ---- ALGORITHMS ----
 
 >> A2: Briefly describe what happens in a call to your timer_sleep(),
 >> including the effects of the timer interrupt handler.
-    If the number of ticks is less than or eqal to 0, then we don't want to be sleeping anymore, so we return.
-    Otherwise, we want to put the thread to sleep for however many ticks specified.
+    If the number of ticks is less than or eqal to 0, then we don't want to be sleeping, so we return.
+    Otherwise, we want to put the thread to sleep for however many ticks specified through the function.
+    When the timer interrup handler calls, we determine if the threads in sleep_list, are ready to wake up.
 
 >> A3: What steps are taken to minimize the amount of time spent in
 >> the timer interrupt handler?
     We created a sleep list, that way when we want to see if it is possible to wake a thread, we only check
-    those that are sleeping and not the ones that are waiting or currently running.
+    those that are sleeping, and not the ones that are waiting or currently running.
 
 ---- SYNCHRONIZATION ----
 
 >> A4: How are race conditions avoided when multiple threads call
 >> timer_sleep() simultaneously?
-    We use locks to avoid the race conditions when multiple threads call timer_sleep() simultaneously.
+    We disable interrupts to avoid the race conditions when multiple threads call timer_sleep() simultaneously.
     By putting locks around the critical section, we can only have one thread working at a time, and then we can 
     release the lock, allowing the other threads who are waiting to access the critical section next.
 
@@ -80,9 +85,9 @@ Chris Donnelly <cjdonnel@ksu.edu>
     struct semaphore sema_sleep;
         This is a semaphore for the sleeping thread
     struct list_elem donation_elem;
-        This is a list of the donation elements
+        This is a list element for the donation list
     struct list donor_list; 
-        This is a list of the donors
+        This is a list of the donation_elem above.
     struct lock *blocker;
         This is a lock of the blocker
         
@@ -100,6 +105,8 @@ Chris Donnelly <cjdonnel@ksu.edu>
 
 >> B4: Describe the sequence of events when a call to lock_acquire()
 >> causes a priority donation.  How is nested donation handled?
+    A donation is needed when the current thread that has the lock, in which a higher priority thread needs the lock 
+    in order to run. We first check the current thread's 
     
 >> B5: Describe the sequence of events when lock_release() is called
 >> on a lock that a higher-priority thread is waiting for.
