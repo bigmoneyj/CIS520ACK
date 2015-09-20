@@ -15,9 +15,9 @@ Chris Donnelly <cjdonnel@ksu.edu>
 >> If you have any preliminary comments on your submission, notes for
 >> the TA, or extra credit, please give them here.
 
->> Please cite any offline or online sources you consulted while
->> preparing your submission, other than the Pintos documentation,
->> course text, lecture notes, and course staff.
+>> Online sources that we consulted to help learn about the project
+http://achurch.org/services/docs-5.1.24/tech/2.html
+http://knowledgejunk.net/2011/05/06/avoiding-busy-wait-in-timer_sleep-on-pintos/
 
 
                  ALARM CLOCK
